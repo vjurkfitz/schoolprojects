@@ -1,3 +1,6 @@
 Project created for a Business Intelligence course.
 
 Reads a xml file and creates a dashboard with information about its data.
+
+It was created to read specifically a file on Vancouver's housing tax information.
+So the program was tailored for its data.
