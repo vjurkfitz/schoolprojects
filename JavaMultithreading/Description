@@ -1,0 +1,3 @@
+Simple project to demonstrate multithreading in Java.
+
+A mouse click adds a new sprite to the screen.
