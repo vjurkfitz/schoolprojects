@@ -1,0 +1,2 @@
+Project created to demonstrate a server that takes accepts multiple clients that can make changes to a database.
+Users the Hibernate framework.
