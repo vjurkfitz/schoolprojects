@@ -1,0 +1,6 @@
+Project created for Programming Language Research Project. 
+
+Program takes a .txt file with a list of things and sorts them using different methods (Bubble, Merge, Quick), counting the number of iterations as it does so.
+Also has the option of adding items to different data structures (Tree, Stack, Linked List), sorting them afterwards.
+
+** Program is not finished. **
