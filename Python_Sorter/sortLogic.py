@@ -26,7 +26,7 @@ class Bubblesort:
     def start(self):
         """ Calls sort for the first time """
         if len(self.sorted_data) > 0:
-            data = self.sorted_data
+            data = deepcopy(self.sorted_data)
 
             for i in range(0, len(data) - 1):
                 swapped = False
@@ -43,7 +43,7 @@ class Bubblesort:
                 if not swapped:
                     break
 
-            self.sorted_data = data
+            self.sorted_data = deepcopy(data)
 
     def worst_case(self):
         """ Prepares worst case scenario: smallest at the end """
@@ -86,12 +86,14 @@ class Quicksort:
 
     def sort(self,ini,fini):
         """ Partition divides array in 2
-            Then sort is called for each half """
+            Then sort is called for each part """
+
         if ini < fini:
             q = self.partition(ini,fini)
+            self.iterations += 1
             self.sort(ini,q-1)
             self.sort(q+1,fini)
-            self.iterations += 1
+
 
     def partition(self,ini,fini):
         """ Organizes two parts of an array
@@ -113,6 +115,11 @@ class Quicksort:
         self.sorted_data[fini] = aux
 
         return i
+
+    def worst_case(self):
+        """ Prepares worst case: already sorted """
+        self.start()
+        self.iterations = 0
 
 
 class Mergesort:

@@ -215,8 +215,8 @@ class LoadFileWindow(tk.Toplevel):
 
             for line in file:
                 for c in line:
-                    if ord(c.upper()) in range(65,90):
-                        is_string = True
+                    if ord(c.upper()) in range(65,90):      # Checks for characters (ASCII)
+                        is_string = True                    # 65 = A, 90 = Z
                         break;
 
                 if is_string:
@@ -324,22 +324,27 @@ class SortDataWindow(tk.Toplevel):
                 bubble = sorters.Bubblesort(data[:])
 
                 # Dataset as is
-                thread1 = SortThread(bubble)
-                thread1.start()
+                bubble_thread1 = SortThread(bubble)
+                bubble_thread1.start()
 
                 # Worst case scenario
                 bubble_worst = deepcopy(bubble)
                 bubble_worst.worst_case()
 
-                thread2 = SortThread(bubble_worst)
-                thread2.start()
+                bubble_thread2 = SortThread(bubble_worst)
+                bubble_thread2.start()
 
                 # Best case scenario
                 bubble_best = deepcopy(bubble)
                 bubble_best.best_case()
 
-                thread3 = SortThread(bubble_best)
-                thread3.start()
+                bubble_thread3 = SortThread(bubble_best)
+                bubble_thread3.start()
+
+                # Wait for threads to finish
+                bubble_thread1.join()
+                bubble_thread2.join()
+                bubble_thread3.join()
 
                 results_bubble = tk.Label(self, text='BUBBLE SORT\nIterations:\nDataset as is: ' + str(bubble.iterations) + '\nBest case: ' + str(bubble_best.iterations) + '\nWorst case: ' + str(bubble_worst.iterations))
                 results_bubble.grid(column=0,row=1)
@@ -358,9 +363,25 @@ class SortDataWindow(tk.Toplevel):
             try:
                 quickie = sorters.Quicksort(data[:])
 
-                SortThread(quickie).start()
+                # Dataset as is
+                quick_thread1 = SortThread(quickie)
+                quick_thread1.start()
 
-                results_quick = tk.Label(self,text='Quick sort:\nIterations: ' + quickie.iterations.__str__())
+                # Best case scenario
+                quick_best = deepcopy(quickie)
+
+                # Worst case scenario
+                quick_worst = deepcopy(quickie)
+                quick_worst.worst_case()
+
+                quick_thread2 = SortThread(quick_worst)
+                quick_thread2.start()
+
+                # Wait for threads to finish
+                quick_thread1.join()
+                quick_thread2.join()
+
+                results_quick = tk.Label(self,text='Quick sort:\nIterations: ' + str(quickie.iterations) + '\nWorst case: ' + str(quick_worst.iterations))
                 results_quick.grid(column=1,row=1)
 
                 quick_list = ""
@@ -379,7 +400,7 @@ class SortDataWindow(tk.Toplevel):
 
                 SortThread(merge).start()
 
-                results_merge = tk.Label(self,text="Merge sort:\nIterations: " + merge.iterations.__str__())
+                results_merge = tk.Label(self,text="Merge sort:\nIterations: " + str(merge.iterations))
                 results_merge.grid(column=3,row=1)
 
                 merge_list = ""
